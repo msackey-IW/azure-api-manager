@@ -34,11 +34,91 @@ az group create -g azureapimanagerresourcegroup -l australiaeast
 az deployment group create -g azureapimanagerresourcegroup -f main.bicep
 ```
 - Due to the significant size of the resource, it may take up to an hour to get up and running.
+- A successful completion of the apim instance should show a json with the details of the instance as shown in the example below.
+```json
+{
+  "id": "/subscriptions/1c2f3635-7522-41b4-b63a-8a891c19fcbd/resourceGroups/azureapimanagerresourcegroup/providers/Microsoft.Resources/deployments/main",
+  "location": null,
+  "name": "main",
+  "properties": {
+    "correlationId": "d22cb78b-5b28-4eaa-9d68-443c726fe5e8",
+    "debugSetting": null,
+    "dependencies": [],
+    "duration": "PT1M36.3840677S",
+    "error": null,
+    "mode": "Incremental",
+    "onErrorDeployment": null,
+    "outputResources": [
+      {
+        "id": "/subscriptions/1c2f3635-7522-41b4-b63a-8a891c19fcbd/resourceGroups/azureapimanagerresourcegroup/providers/Microsoft.ApiManagement/service/ecommercapimanager",
+        "resourceGroup": "azureapimanagerresourcegroup"
+      },
+      {
+        "id": "/subscriptions/1c2f3635-7522-41b4-b63a-8a891c19fcbd/resourceGroups/azureapimanagerresourcegroup/providers/Microsoft.ApiManagement/service/ecommercapimanager/apis/ecommerceapi",
+        "resourceGroup": "azureapimanagerresourcegroup"
+      }
+    ],
+    "outputs": null,
+    "parameters": {
+      "apimLocation": {
+        "type": "String",
+        "value": "australiaeast"
+      },
+      "apimName": {
+        "type": "String",
+        "value": "ecommercapimanager"
+      },
+      "publisherEmail": {
+        "type": "String",
+        "value": "mathias.sackey@outlook.com"
+      },
+      "publisherName": {
+        "type": "String",
+        "value": "Mathias Sackey"
+      }
+    },
+    "parametersLink": null,
+    "providers": [
+      {
+        "id": null,
+        "namespace": "Microsoft.Resources",
+        "providerAuthorizationConsentState": null,
+        "registrationPolicy": null,
+        "registrationState": null,
+        "resourceTypes": [
+          {
+            "aliases": null,
+            "apiProfiles": null,
+            "apiVersions": null,
+            "capabilities": null,
+            "defaultApiVersion": null,
+            "locationMappings": null,
+            "locations": [
+              null
+            ],
+            "properties": null,
+            "resourceType": "deployments",
+            "zoneMappings": null
+          }
+        ]
+      }
+    ],
+    "provisioningState": "Succeeded",
+    "templateHash": "2855039350285583091",
+    "templateLink": null,
+    "timestamp": "2024-02-13T00:23:46.068344+00:00",
+    "validatedResources": null
+  },
+  "resourceGroup": "azureapimanagerresourcegroup",
+  "tags": null,
+  "type": "Microsoft.Resources/deployments"
+}
+```
 
 ## TESTING
 - Login to [azure portal](https://portal.azure.com/#home).
-- Click on `resource groups -> azureapimanagerresourcegroup -> ecommerceapimanager`.
-- In the left sidebar, click on `APIS -> ecommerceapimanager`.
+- Navigate to `resource groups -> azureapimanagerresourcegroup -> ecommerceapimanager`.
+- In the left sidebar, click on `APIs -> ecommerceapimanager`.
 - This should provide you will a list of API endpoints implemented using the openapi spec found in `resources/api.json` now manage in Azure APIM.
 - The Endpoints are yet to be implemented but give you an idea of what they would look like within Azure APIM.
 
