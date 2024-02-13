@@ -3,26 +3,32 @@ param apimLocation string
 param publisherName string
 param publisherEmail string
 
-resource myApiManager 'Microsoft.ApiManagement/service@2022-08-01' = {
+resource apiManagementInstance 'Microsoft.ApiManagement/service@2023-05-01-preview' = {
   name: apimName
   location: apimLocation
-  sku: {
-    name: 'Developer'
-    capacity: 1
-  }
   properties: {
     publisherEmail: publisherEmail
     publisherName: publisherName
   }
-}
-
-resource eCommerceApi 'Microsoft.ApiManagement/service/apis@2022-08-01' = {
-  parent: myApiManager
-  name: 'myapimanager'
-  properties: {
-    format: 'swagger-yml'
-    value: loadTextContent('../resources/api.json')
-    path: 'eCommerce'
+  sku: {
+    name: 'Developer'
+    capacity: 1
   }
 }
-
+resource api 'Microsoft.ApiManagement/service/apis@2023-05-01-preview' = {
+  parent: apiManagementInstance
+  name: 'ecommerceapi'
+  properties: {
+    displayName: apimName
+    format: 'openapi+json'
+    value: loadTextContent('../resources/api.json')
+    protocols: [
+      'https'
+    ]
+    path: 'ecommerce'
+    isCurrent: true
+  }
+  dependsOn: [
+    apiManagementInstance
+  ]
+}

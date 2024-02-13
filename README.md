@@ -34,4 +34,18 @@ az group create -g azureapimanagerresourcegroup -l australiaeast
 az deployment group create -g azureapimanagerresourcegroup -f main.bicep
 ```
 - Due to the significant size of the resource, it may take up to an hour to get up and running.
-- Once completed, 
+
+## TESTING
+- Login to [azure portal](https://portal.azure.com/#home).
+- Click on `resource groups -> azureapimanagerresourcegroup -> ecommerceapimanager`.
+- In the left sidebar, click on `APIS -> ecommerceapimanager`.
+- This should provide you will a list of API endpoints implemented using the openapi spec found in `resources/api.json` now manage in Azure APIM.
+- The Endpoints are yet to be implemented but give you an idea of what they would look like within Azure APIM.
+
+## CLOSING UP
+- Once testing is completed, return to the terminal where all the previous commands were run and finish with the command below.
+```bash
+az group delete -g azureapimanagerresourcegroup
+```
+-  Type `y` and the `enter key` when prompted to do so.
+- All resources created during this test should now be destroyed.
